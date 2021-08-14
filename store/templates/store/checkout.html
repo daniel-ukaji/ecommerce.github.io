@@ -1,8 +1,9 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% load humanize %}
+
 {% block content %}
 {% load paystack %}
-
 
 <div class="row">
 	<div class="col-lg-6">
@@ -48,21 +49,19 @@
 		<div class="box-element hidden" id="payment-info">
 			<small>Paystack Options</small>
 			<!--<button id="make-payment">Make Payment</button>-->
-
-			<!-- <div class="container">  
-        	<h2>Summary</h2>     
-        	<table>
-            	<tr><td>Cloths</td> <td> &#8358;1000</td></tr>
-            	<tr><td>Shoes</td> <td>&#8358;2000</td></tr>
-            	<tr><td>Table</td> <td>&#8358;500</td></tr>
-            	<tr><td>Chairs</td> <td>&#8358;200</td></tr>
-            	<tr><td>Total</td> <td>&#8358;3700</td></tr>
-        	</table> 
-        	<button onclick="payWithPaystack()"> Pay </button>
-    </div> -->
-    {% paystack_button amount=order.get_cart_total email="j@example.com" %}
-
-
+<!-- 
+			<div class="container">  
+	        	<h2>Summary</h2>     
+	        	<table>
+	            	<tr><td>Cloths</td> <td> &#8358;1000</td></tr>
+	            	<tr><td>Shoes</td> <td>&#8358;2000</td></tr>
+	            	<tr><td>Table</td> <td>&#8358;500</td></tr>
+	            	<tr><td>Chairs</td> <td>&#8358;200</td></tr>
+	            	<tr><td>Total</td> <td>&#8358;3700</td></tr>
+	        	</table> 
+	        	<button onclick="payWithPaystack()"> Pay </button>
+   		 	</div -->
+    		{% paystack_button amount=order.get_cart_total email="j@example.com" %}
 		</div>
 
 	</div>
@@ -77,12 +76,12 @@
 			<div class="cart-row">
 					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
 					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>₦{{item.product.price}}</p></div>
+					<div style="flex:1"><p>₦{{item.product.price|intcomma}}</p></div>
 					<div style="flex:1"><p>x{{item.quantity}}</p></div>
 				</div>
 				{% endfor %}
 				<h5>Items:   {{order.get_cart_items}}</h5>
-				<h5>Total:   ₦{{order.get_cart_total|floatformat:2}}</h5>
+				<h5>Total:   ₦{{order.get_cart_total|floatformat:2|intcomma}}</h5>
 		</div>
 	</div>
 
@@ -176,5 +175,4 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     
-
 {% endblock content %}

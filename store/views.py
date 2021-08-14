@@ -9,7 +9,6 @@ from . utils import cookieCart, cartData, guestOrder
 # Create your views here.
 
 def store(request):
-
 	data = cartData(request)
 	cartItems = data['cartItems']
 
@@ -71,9 +70,6 @@ def processOrder(request):
 	if request.user.is_authenticated:
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, complete=False)
-		
-
-		
 
 	else:
 		customer, order = guestOrder(request, data)

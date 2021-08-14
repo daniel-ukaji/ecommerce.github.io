@@ -23,28 +23,32 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ohmncdbnz2br*c0yo$fqml&v57!x__-z(_u7($mp1rhfj5+642'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['lbs-1.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['lbs-1.herokuapp.com','127.0.0.1', '*']
 
+DEFAULT_FROM_EMAIL = 'webmaster@lbs-1.herokuapp.com'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'store.apps.StoreConfig',
     'paystack',
 
 ]
 
+
 PAYSTACK_PUBLIC_KEY='pk_test_f9f4ebf8261346c69ff097dfc35e6ff19d9d7db4'
 PAYSTACK_SECRET_KEY='sk_test_20e69816d2d6c536e1459487d6b7165261c82a22'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +65,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,11 +129,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

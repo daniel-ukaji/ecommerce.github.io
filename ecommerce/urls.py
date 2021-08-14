@@ -19,10 +19,18 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+admin.site.site_header = 'lbs-1' #login page
+admin.site.index_title = 'lbs-1 Administration '
+admin.site.site_title = 'lbs-1 Site'
+admin.site.site_index = 'lbs-1 Adminstrator'
+
+name = 'lbs-1'
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
     path("paystack", include(('paystack.urls','paystack'),namespace='paystack')),
 ]
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
