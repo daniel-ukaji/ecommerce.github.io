@@ -12,7 +12,7 @@ http3==0.6.7
 hyperframe==5.2.0
 idna==2.10
 Paperboy==1.0.1
-Pillow==7.2.0
+Pillow==9.3.0
 pypaystack==1.21
 python-dateutil==2.8.1
 pytz==2020.1
